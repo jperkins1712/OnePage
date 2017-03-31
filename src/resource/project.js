@@ -13,25 +13,25 @@ module.exports = {
 }
 
 /** @function list
- * Sends a list of all projects as a JSON array.
+ * Sends a list of all classes as a JSON array.
  * @param {http.incomingRequest} req - the request object
  * @param {http.serverResponse} res - the response object
  * @param {sqlite3.Database} db - the database object
  */
 function list(req, res, db) {
-  db.all("SELECT * FROM projects", [], function(err, projects){
+  db.all("SELECT * FROM classes", [], function(err, classes){
     if(err) {
       console.error(err);
       res.statusCode = 500;
       res.end("Server Error")
     }
     res.setHeader("Content-Type", "text/json");
-    res.end(JSON.stringify(projects));
+    res.end(JSON.stringify(classes));
   });
 }
 
 /** @function create
- * Creates a new project and adds it to the database.
+ * Creates a new class and adds it to the database.
  * @param {http.incomingRequest} req - the request object
  * @param {http.serverResponse} res - the response object
  * @param {sqlite3.Database} db - the database object
@@ -51,13 +51,13 @@ function create(req, res, db) {
 
   req.on("end", function() {
     var project = JSON.parse(body);
-    db.run("INSERT INTO projects (name, description, version, repository, license) VALUES (?,?,?,?,?)",
-      [project.name, project.description, project.version, project.repository, project.license],
+    db.run("INSERT INTO classes (name, description, imagepath) VALUES (?,?,?)",
+      [classes.name, classes.description, classes.imagepath],
       function(err) {
         if(err) {
           console.error(err);
           res.statusCode = 500;
-          res.end("Could not insert project into database");
+          res.end("Could not insert data into database");
           return;
         }
         res.statusCode = 200;
@@ -68,14 +68,14 @@ function create(req, res, db) {
 }
 
 /** @function read
- * Serves a specific project as a JSON string
+ * Serves a specific class as a JSON string
  * @param {http.incomingRequest} req - the request object
  * @param {http.serverResponse} res - the response object
  * @param {sqlite3.Database} db - the database object
  */
 function read(req, res, db) {
   var id = req.params.id;
-  db.get("SELECT * FROM projects WHERE id=?", [id], function(err, project){
+  db.get("SELECT * FROM classes WHERE id=?", [id], function(err, classes){
     if(err) {
       console.error(err);
       res.statusCode = 500;
@@ -115,13 +115,13 @@ function update(req, res, db) {
 
   req.on("end", function() {
     var project = JSON.parse(body);
-    db.run("UPDATE projects SET name=?, description=?, version=?, repository=?, license=? WHERE id=?",
-      [project.name, project.description, project.version, project.repository, project.license, id],
+    db.run("UPDATE classes SET name=?, description=?, imagepath=? WHERE id=?",
+      [classes.name, classes.description, classes.imagepath, id],
       function(err) {
         if(err) {
           console.error(err);
           res.statusCode = 500;
-          res.end("Could not update project in database");
+          res.end("Could not update data in database");
           return;
         }
         res.statusCode = 200;
@@ -133,13 +133,13 @@ function update(req, res, db) {
 
 /** @destroy
  * Removes the specified project from the database.
- * @param {http.incomingRequest} req - the request object 
+ * @param {http.incomingRequest} req - the request object
  * @param {http.serverResponse} res - the response object
  * @param {sqlite3.Database} db - the database object
  */
 function destroy(req, res, db) {
   var id = req.params.id;
-  db.run("DELETE FROM projects WHERE id=?", [id], function(err) {
+  db.run("DELETE FROM classes WHERE id=?", [id], function(err) {
     if(err) {
       console.error(err);
       res.statusCode = 500;

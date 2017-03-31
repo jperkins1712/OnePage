@@ -1,7 +1,7 @@
 {
-  "name": "scrumtastic",
+  "name": "onepage",
   "version": "1.0.0",
-  "description": "A web app for SCRUM software development",
+  "description": "A One-Page Catalog",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zombiepaladin/scrumtastic.git"
+    "url": "https://github.com/jperkins1712/OnePage"
   },
   "keywords": [
     "SCRUM",
@@ -18,13 +18,11 @@
     "task",
     "board"
   ],
-  "author": "Nathan H. Bean",
+  "author": "Nathan Bean (in-class code modified by Joseph Perkins for this assignment)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/zombiepaladin/scrumtastic/issues"
-  },
-  "homepage": "https://github.com/zombiepaladin/scrumtastic#readme",
+  "homepage": "https://github.com/jperkins1712/OnePage",
   "dependencies": {
-    "sqlite3": "3.1.8"
+    "sqlite3": "3.1.8",
+    "JQuery": "3.2.1"
   }
 }

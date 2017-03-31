@@ -1,2 +1,2 @@
-INSERT INTO projects (name, description, version, repository, license)
-VALUES ("Testy", "A Test Project", "v 0.0", null, "MIT");
+INSERT INTO classes (name, description, imagepath)
+VALUES ("Test", "A Test Class", "/images/test.png");

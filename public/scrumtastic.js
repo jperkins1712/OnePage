@@ -29,15 +29,15 @@ function loadIndex() {
     if (xhr.readyState === DONE) {
       if (xhr.status === OK) {
         console.log(xhr.responseText); // 'This is the returned text.'
-        var projects = JSON.parse(xhr.responseText);
-        projects.forEach(function(project){
+        var classes = JSON.parse(xhr.responseText);
+        classes.forEach(function(class){
           var name = document.createElement('a');
-          name.innerHTML = project.name;
-          name.href = "/projects/" + project.id;
+          name.innerHTML = class.name;
+          name.href = "/projects/" + class.id;
           document.body.appendChild(name);
           project.onClick = function(event) {
             event.preventDefault();
-            loadProject("/projects/" + project.id);
+            loadProject("/projects/" + class.id);
           }
         });
 
@@ -59,12 +59,12 @@ function loadProject(url) {
     if (xhr.readyState === DONE) {
       if (xhr.status === OK) {
         console.log(xhr.responseText); // 'This is the returned text.'
-        var project = JSON.parse(xhr.responseText);
+        var class = JSON.parse(xhr.responseText);
         var wrapper = document.createElement('div');
         var name = document.createElement('h1');
         var image = document.createElement('img');
-        name.innerHTML = project.name;
-        image.src = project.imageSrc;
+        name.innerHTML = class.name;
+        image.src = class.imageSrc;
         wrapper.appendChild(name);
         wrapper.appendChild(image);
         document.body.
